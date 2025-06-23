@@ -146,7 +146,7 @@ function ApprovedTicketsPage() {
   const [selectedTicket, setSelectedTicket] = React.useState<Ticket | null>(null);
   const [modalOpened, setModalOpened] = React.useState(false);
 
-  const { data: stats, isLoading: isLoadingStats } = useQuery<DashboardStats>({
+  const { data: stats } = useQuery<DashboardStats>({
     queryKey: ['dashboardStats'],
     queryFn: getDashboardStats,
   });

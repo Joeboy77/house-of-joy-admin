@@ -1,4 +1,4 @@
-import { Card, Group, Avatar, Text, Badge, Button, Stack, Box, Anchor, Textarea, Modal, Image, Divider, Grid, Paper } from '@mantine/core';
+import { Card, Group, Avatar, Text, Badge, Button, Stack, Box, Anchor, Textarea, Modal, Image, Grid, Paper } from '@mantine/core';
 import { IconCheck, IconX, IconFile, IconPdf, IconUser, IconEye, IconClock, IconAlertCircle, IconMail, IconPhone, IconSchool, IconBook, IconId } from '@tabler/icons-react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { notifications } from '@mantine/notifications';

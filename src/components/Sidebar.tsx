@@ -1,5 +1,4 @@
 import { NavLink as MantineNavLink, Stack, Modal, Text, Button, Group, Center } from '@mantine/core';
-import type { MantineTheme } from '@mantine/core';
 import { IconCheck, IconClock, IconLogout, IconShield } from '@tabler/icons-react';
 import { useAuthStore } from '../store/useAuthStore';
 import { useNavigate, NavLink as RouterNavLink, useLocation } from 'react-router-dom';

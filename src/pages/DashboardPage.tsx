@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Title, Text, Stack, Group, Button, Alert, Badge, Loader, Center, TextInput, Select, Paper, Modal, PasswordInput } from '@mantine/core';
 import { IconInfoCircle, IconPlus, IconSearch, IconFilter } from '@tabler/icons-react';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useMutation } from '@tanstack/react-query';
 import { SubmissionCard } from '../components/SubmissionCard';
 import type { Submission } from '../components/SubmissionCard';
 import { useAuthStore } from '../store/useAuthStore';
@@ -12,17 +12,19 @@ import { useForm } from '@mantine/form';
 import { useDisclosure } from '@mantine/hooks';
 import { notifications } from '@mantine/notifications';
 
-enum SubmissionStatus {
-    ALL = 'ALL',
-    APPROVED = 'APPROVED',
-    REJECTED = 'REJECTED',
-    PENDING = 'PENDING',
-    PAID = 'PAID',
-}
+const SubmissionStatus = {
+    ALL: 'ALL',
+    APPROVED: 'APPROVED',
+    REJECTED: 'REJECTED',
+    PENDING: 'PENDING',
+    PAID: 'PAID',
+} as const;
+
+type SubmissionStatusType = typeof SubmissionStatus[keyof typeof SubmissionStatus];
 
 function DashboardPage() {
   const user = useAuthStore((state) => state.user);
-  const [activeFilter, setActiveFilter] = useState<SubmissionStatus>(SubmissionStatus.ALL);
+  const [activeFilter, setActiveFilter] = useState<SubmissionStatusType>(SubmissionStatus.ALL);
   const [searchTerm, setSearchTerm] = useState('');
   const [institutionFilter, setInstitutionFilter] = useState<string>('');
   const [ticketTypeFilter, setTicketTypeFilter] = useState<string>('');
@@ -43,8 +45,6 @@ function DashboardPage() {
       phoneNumber: (value) => (/^\+?\d{10,14}$/.test(value) ? null : 'Please enter a valid phone number'),
     },
   });
-
-  const queryClient = useQueryClient();
 
   const createAdminMutation = useMutation({
     mutationFn: createSubAdmin,
@@ -284,12 +284,12 @@ function DashboardPage() {
           icon={<IconInfoCircle />} 
           title="New Submissions" 
           withCloseButton 
-          styles={(theme) => ({
+          styles={{
               root: { backgroundColor: '#EFF6FF', borderColor: '#BFDBFE' },
               title: { color: '#1E40AF', fontWeight: 'bold' },
               body: { color: '#1D4ED8' },
               message: { color: '#1D4ED8' }
-          })}
+          }}
         >
           {isLoadingStats ? '...' : stats?.pendingStudentApplications ?? 0} new student submissions require verification
         </Alert>
